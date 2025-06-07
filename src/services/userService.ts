@@ -36,7 +36,7 @@ export const login = async ({ email, password }: LoginParams) => {
   const findUser = await userModel.findOne({ email });
 
   if (!findUser) {
-    return { dara: " Incorrect email or password !" , statusCode: 400};
+    return { data: " Incorrect email or password !" , statusCode: 400};
   }
 
   const passwordMatch = await bcrypt.compare(password , findUser.password);
@@ -44,10 +44,10 @@ export const login = async ({ email, password }: LoginParams) => {
     return { data: generateJWT({email , firstName: findUser.firstName , lastName:findUser.lastName}), statusCode: 200};
   }
 
-  return { dara: " Incorrect email or password !" , statusCode: 400};
+  return { data: " Incorrect email or password !" , statusCode: 400};
 };
 
 
 const generateJWT = (data: any) => {
-    return jwt.sign(data, 'uRBzTScTvoAXFTH09pk0flL2a50MCXClQY')
+    return jwt.sign(data, process.env.JWT_SECRET! )
 }
