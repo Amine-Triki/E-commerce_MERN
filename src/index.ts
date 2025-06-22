@@ -16,7 +16,7 @@ const PORT = 3001;
 app.use(express.json());
 
 mongoose
-  .connect("mongodb://localhost:27017/ecommerce")
+  .connect(process.env.Database_URL || '')
   .then(() => console.log("Connected to MongoDB"))
   .catch((err: any) => console.log("MongoDB connection error:", err));
 

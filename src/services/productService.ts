@@ -12,7 +12,8 @@ export const getAllProducts = async () => {
 };
 
 export const seedInitialProducts = async () => {
-  const products = [
+try {
+    const products = [
     {
       title: "Dell laptop",
       image: imgUrl1,
@@ -37,4 +38,7 @@ export const seedInitialProducts = async () => {
   if (exportedProducts.length === 0) {
     await productModel.insertMany(products);
   }
+} catch (err) {
+  console.error("cannot see database" , err);
+}
 };
