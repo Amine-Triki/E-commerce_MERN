@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 import AmineLogo from "../assets/4-157-71-68080953ce2d3.webp";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
-const pages: string[] = ["Home", "Projects", "E-commerce", "Skills", "Contact"];
+const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

@@ -7,7 +7,7 @@ import Theme from './components/Theme'
 
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 
-import { Home, Skills, Projects, Contact, NotFound } from './pages/index';
+import { Home, Skills, Projects, Contact, NotFound , Ecommerce} from './pages/index';
 const Layout = () => (
     <>
         <Nav/>
@@ -25,6 +25,7 @@ const router = createBrowserRouter([
             {path: "/contact", element: <Contact/>},
             {path: "/projects", element: <Projects/>},
             {path: "/skills", element: <Skills/>},
+            {path: "/Ecommerce", element: <Ecommerce/>},
             {path: "*", element: <NotFound/>},
 
         ],
