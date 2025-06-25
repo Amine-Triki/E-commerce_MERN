@@ -12,10 +12,12 @@ import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 import AmineLogo from "../assets/4-157-71-68080953ce2d3.webp";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useAuth } from "../context/Auth/AuthContext";
 
 const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
+  const { username, token} = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,6 +35,9 @@ function Nav(): JSX.Element {
   const handleCloseNavMenu = (): void => {
     setAnchorElNav(null);
   };
+
+console.log("from Nav", {username, token});
+
 
   return (
     <AppBar

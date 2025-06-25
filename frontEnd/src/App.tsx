@@ -15,6 +15,7 @@ import {
   Ecommerce,
   RegisterPage,
 } from "./pages/index";
+import AuthProvider from "./context/Auth/AuthProvider";
 const Layout = () => (
   <>
     <Nav />
@@ -42,7 +43,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider theme={Theme}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
