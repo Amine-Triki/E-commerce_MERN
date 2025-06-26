@@ -18,7 +18,7 @@ import Button from "@mui/material/Button";
 const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
-  const { username, isAuthenticated , logout} = useAuth();
+  const { username, isAuthenticated, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,16 +37,17 @@ function Nav(): JSX.Element {
     setAnchorElNav(null);
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handlelogin = () =>{
-navigate("/login");
-  }
-
+  const handlelogin = () => {
+    navigate("/login");
+  };
 
   const heandlelogout = () => {
     logout();
-    navigate("/Ecommerce");}
+     handleClose();
+    navigate("/Ecommerce");
+  };
   return (
     <AppBar
       position="static"
@@ -134,7 +135,8 @@ navigate("/login");
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              letterSpacing: ".2rem",
+              letterSpacing: ".16rem",
+              fontSize: "0.9rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -212,7 +214,9 @@ navigate("/login");
               </Menu>
             </Box>
           ) : (
-            <Button variant="outlined"  color="info" onClick={handlelogin}>login</Button>
+            <Button variant="outlined" color="info" onClick={handlelogin}>
+              login
+            </Button>
           )}
         </Toolbar>
       </Container>
