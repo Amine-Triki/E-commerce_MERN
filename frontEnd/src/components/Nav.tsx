@@ -18,7 +18,7 @@ import Button from "@mui/material/Button";
 const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
-  const { username, isAuthenticated } = useAuth();
+  const { username, isAuthenticated , logout} = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -43,6 +43,10 @@ function Nav(): JSX.Element {
 navigate("/login");
   }
 
+
+  const heandlelogout = () => {
+    logout();
+    navigate("/Ecommerce");}
   return (
     <AppBar
       position="static"
@@ -204,7 +208,7 @@ navigate("/login");
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>My Orders</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={heandlelogout}>Logout</MenuItem>
               </Menu>
             </Box>
           ) : (
