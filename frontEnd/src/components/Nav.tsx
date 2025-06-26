@@ -14,6 +14,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import AmineLogo from "../assets/4-157-71-68080953ce2d3.webp";
 import { useAuth } from "../context/Auth/AuthContext";
 import Button from "@mui/material/Button";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import { Badge } from "@mui/material";
 
 const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
@@ -45,8 +47,12 @@ function Nav(): JSX.Element {
 
   const heandlelogout = () => {
     logout();
-     handleClose();
+    handleClose();
     navigate("/Ecommerce");
+  };
+
+  const handleCart = () => {
+    navigate("/cart");
   };
   return (
     <AppBar
@@ -179,6 +185,12 @@ function Nav(): JSX.Element {
           >
             {username}
           </Typography>
+
+          <IconButton aria-label="cart" sx={{ margin: "0 10px" }} onClick={handleCart} >
+            <Badge badgeContent={4} color="secondary">
+              <ShoppingCart  />
+            </Badge>
+          </IconButton>
           {isAuthenticated ? (
             <Box sx={{ margin: "0 10px" }}>
               <IconButton

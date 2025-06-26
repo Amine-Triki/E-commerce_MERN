@@ -15,8 +15,10 @@ import {
   Ecommerce,
   RegisterPage,
   LoginPage,
+  CartPage,
 } from "./pages/index";
 import AuthProvider from "./context/Auth/AuthProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
 const Layout = () => (
   <>
     <Nav />
@@ -37,6 +39,13 @@ const router = createBrowserRouter([
       { path: "/Ecommerce", element: <Ecommerce /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/login", element: <LoginPage /> },
+
+      /*start protect route for cart */
+      {
+        element: <ProtectedRoute />,
+        children: [{ path: "/cart", element: <CartPage /> }],
+      },
+      /*end protect route for cart */
       { path: "*", element: <NotFound /> },
     ],
   },
