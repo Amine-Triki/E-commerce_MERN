@@ -28,6 +28,9 @@ const Theme = createTheme({
         body1: {
             fontSize: '1.3rem',
         },
+        body2: {
+            fontSize: '1rem',
+        },
     },
 });
 

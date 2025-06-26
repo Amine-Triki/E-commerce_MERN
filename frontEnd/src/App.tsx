@@ -14,6 +14,7 @@ import {
   NotFound,
   Ecommerce,
   RegisterPage,
+  LoginPage,
 } from "./pages/index";
 import AuthProvider from "./context/Auth/AuthProvider";
 const Layout = () => (
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: "/skills", element: <Skills /> },
       { path: "/Ecommerce", element: <Ecommerce /> },
       { path: "/register", element: <RegisterPage /> },
+      { path: "/login", element: <LoginPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, type JSX, type MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -9,15 +10,15 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AmineLogo from "../assets/4-157-71-68080953ce2d3.webp";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useAuth } from "../context/Auth/AuthContext";
+import Button from "@mui/material/Button";
 
 const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
-  const { username, token} = useAuth();
+  const { username, isAuthenticated } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -36,8 +37,11 @@ function Nav(): JSX.Element {
     setAnchorElNav(null);
   };
 
-console.log("from Nav", {username, token});
+  const navigate = useNavigate()
 
+  const handlelogin = () =>{
+navigate("/login");
+  }
 
   return (
     <AppBar
@@ -133,6 +137,9 @@ console.log("from Nav", {username, token});
           >
             Amine Triki
           </Typography>
+          <Box sx={{ flexGrow: 0 }}>
+            <img src={AmineLogo} alt="Amine Logo" style={{ height: "40px" }} />
+          </Box>
           <Box
             sx={{
               flexGrow: 1,
@@ -159,40 +166,50 @@ console.log("from Nav", {username, token});
               </NavLink>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <img src={AmineLogo} alt="Amine Logo" style={{ height: "40px" }} />
-          </Box>
 
-          <Box sx={{ margin: '0 10px' }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-            </Menu>
-          </Box>
+          <Typography
+            variant="body2"
+            sx={{ margin: "0 10", display: { xs: "none", lg: "block" } }}
+          >
+            {username}
+          </Typography>
+          {isAuthenticated ? (
+            <Box sx={{ margin: "0 10px" }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <Avatar
+                  alt={username?.charAt(0).toUpperCase() || "user"}
+                  src=""
+                />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>My Orders</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
+            </Box>
+          ) : (
+            <Button variant="outlined"  color="info" onClick={handlelogin}>login</Button>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
