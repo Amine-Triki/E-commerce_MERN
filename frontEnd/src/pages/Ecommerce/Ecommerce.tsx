@@ -30,7 +30,7 @@ if (error) {
       <Container sx={{ my: 4 }}>
         <Grid container spacing={3}>
           {products.map((p) => (
-            <Grid size={{ md: 4 }} sx={{width: "100%"}} >
+            <Grid key={ p._id} size={{ md: 4 }} sx={{width: "100%"}} >
               <ProductCard  {...p} />
             </Grid>
           ))}

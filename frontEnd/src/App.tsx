@@ -19,6 +19,7 @@ import {
 } from "./pages/index";
 import AuthProvider from "./context/Auth/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CartProvider from "./context/Cart/CartProvider";
 const Layout = () => (
   <>
     <Nav />
@@ -55,7 +56,9 @@ function App() {
   return (
     <ThemeProvider theme={Theme}>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
       </AuthProvider>
     </ThemeProvider>
   );
