@@ -16,11 +16,13 @@ import { useAuth } from "../context/Auth/AuthContext";
 import Button from "@mui/material/Button";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
+import { useCart } from "../context/Cart/CartContext";
 
 const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
   const { username, isAuthenticated, logout } = useAuth();
+  const { cartItems} = useCart();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -187,7 +189,7 @@ function Nav(): JSX.Element {
           </Typography>
 
           <IconButton aria-label="cart" sx={{ margin: "0 10px" }} onClick={handleCart} >
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={cartItems.length} color="secondary">
               <ShoppingCart  />
             </Badge>
           </IconButton>
