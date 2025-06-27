@@ -14,4 +14,4 @@ export const CartContext = createContext<CartContextType>({
   addItemToCart: () => {},
 });
 
-export const useCArt = () => useContext(CartContext);
+export const useCart = () => useContext(CartContext);
