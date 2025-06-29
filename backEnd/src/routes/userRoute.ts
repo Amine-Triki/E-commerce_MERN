@@ -31,7 +31,7 @@ router.post("/login", async (request, response) => {
 });
 
 router.get(
-  "my-orders",
+  "/my-orders",
   validateJWT,
   async (request: ExtendRequest, response) => {
     try {
