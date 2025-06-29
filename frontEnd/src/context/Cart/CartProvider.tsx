@@ -52,7 +52,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const addItemToCart = async (productId: string) => {
     try {
-      const response = await fetch(`${baseUrl}/cart//item`, {
+      const response = await fetch(`${baseUrl}/cart/item`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const updateItemInCart = async (productId: string, quantity: number) => {
     try {
-      const response = await fetch(`${baseUrl}/cart//item`, {
+      const response = await fetch(`${baseUrl}/cart/item`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
