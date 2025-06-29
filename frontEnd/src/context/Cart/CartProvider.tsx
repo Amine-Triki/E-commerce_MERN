@@ -28,7 +28,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       const cart = await response.json();
 
       const cartItemsMapped = cart.items.map(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ({
           product,
           quantity,
@@ -71,7 +70,49 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       }
 
       const cartItemsMapped = cart.items.map(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ({
+          product,
+          quantity,
+        }: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          product: any;
+          quantity: number;
+        }) => ({
+          productId: product._id,
+          title: product.title,
+          image: product.image,
+          quantity,
+          unitPrice: product.unitPrice,
+        })
+      );
+
+      setCartItems([...cartItemsMapped]);
+      setTotalAmount(cart.totalAmount);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateItemInCart = async (productId: string, quantity: number) => {
+    try {
+      const response = await fetch(`${baseUrl}/cart//item`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId, quantity }),
+      });
+
+      if (!response.ok) {
+        setError("Failed to update  to cart");
+      }
+      const cart = await response.json();
+      if (!cart) {
+        setError("Failed to parse cart data");
+      }
+
+      const cartItemsMapped = cart.items.map(
         ({
           product,
           quantity,
@@ -96,8 +137,11 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       console.error(error);
     }
   };
+
   return (
-    <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart }}>
+    <CartContext.Provider
+      value={{ cartItems, totalAmount, addItemToCart, updateItemInCart }}
+    >
       {children}
     </CartContext.Provider>
   );

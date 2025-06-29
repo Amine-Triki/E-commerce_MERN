@@ -4,8 +4,18 @@ import { useCart } from "../../context/Cart/CartContext";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 const CartPage = () => {
-  const { cartItems, totalAmount } = useCart();
+  const { cartItems, totalAmount , updateItemInCart} = useCart();
 
+  const handleQuantity = (productId : string , quantity:number) => {
+    if (quantity <= 0) {
+      return;
+    }
+    updateItemInCart(productId, quantity);
+  }
+
+  const handleremoveItem = (productId: string) => {
+    deleteItemInCart();
+  };
   return (
     <main>
       <Container fixed sx={{ mt: 2 }}>
@@ -36,11 +46,12 @@ const CartPage = () => {
                   <Typography>
                     {item.quantity} x {item.unitPrice} TND{" "}
                   </Typography>
+                   <Button onClick={() => handleremoveItem(item.productId)} >Remove item</Button>
                 </Box>
               </Box>
               <ButtonGroup variant="contained" aria-label="Basic button group">
-                <Button>-</Button>
-                <Button>+</Button>
+                <Button onClick={() => handleQuantity(item.productId , item.quantity - 1)}>-</Button>
+                <Button onClick={() => handleQuantity(item.productId , item.quantity + 1)}>+</Button>
               </ButtonGroup>
             </Box>
           ))}
