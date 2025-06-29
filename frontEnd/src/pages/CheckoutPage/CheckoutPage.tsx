@@ -3,11 +3,38 @@ import Container from "@mui/material/Container";
 import { useCart } from "../../context/Cart/CartContext";
 import Button from "@mui/material/Button";
 import { useRef } from "react";
+import { baseUrl } from "../../constants/baseUrl";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/Auth/AuthContext";
 const CheckoutPage = () => {
   const { cartItems, totalAmount } = useCart();
-
+  const { token } = useAuth();
   const addressRef = useRef<HTMLInputElement>(null);
 
+  const navigate = useNavigate();
+
+  const hendleConfirmOrder = async () => {
+    const address = addressRef.current?.value;
+    if (!address) {
+      return;
+    }
+
+    const response = await fetch(`${baseUrl}/cart/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        address,
+      }),
+    });
+
+    if (!response.ok) {
+      return;
+    }
+    navigate("/order-success");
+  };
   const renderCartItems = () => (
     <Box
       display="flex"
@@ -60,7 +87,10 @@ const CheckoutPage = () => {
   );
   return (
     <main>
-      <Container fixed sx={{ mt: 2, display: "flex", flexDirection: "column" , gap: 2 }}>
+      <Container
+        fixed
+        sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2 }}
+      >
         <Box
           display="flex"
           flexDirection="row"
@@ -69,9 +99,14 @@ const CheckoutPage = () => {
         >
           <Typography variant="h4">Checkout</Typography>
         </Box>
-        <TextField inputRef={addressRef} label="Delivery Address" name="address" fullWidth/>
+        <TextField
+          inputRef={addressRef}
+          label="Delivery Address"
+          name="address"
+          fullWidth
+        />
         {renderCartItems()}
-        <Button variant="contained" fullWidth >
+        <Button variant="contained" fullWidth onClick={hendleConfirmOrder}>
           Pay Now
         </Button>
       </Container>

@@ -1,3 +1,4 @@
+import { get } from "mongoose";
 import { cartModel, ICart, ICartItem } from "../models/cartModel.js";
 import { IOrderItem, orderModel } from "../models/orderModel.js";
 import productModel from "../models/productModel.js";
@@ -14,12 +15,22 @@ const createCartForUser = async ({ userId }: createCartForUser) => {
 
 interface GetActiveCartForUser {
   userId: string;
+  populateProducts?: boolean;
 }
 
 export const getActiveCartForUser = async ({
   userId,
+  populateProducts,
 }: GetActiveCartForUser) => {
-  let cart = await cartModel.findOne({ userId, status: "active" });
+  let cart;
+  if (populateProducts) {
+    cart = await cartModel
+      .findOne({ userId, status: "active" })
+      .populate("items.product");
+  } else {
+    cart = await cartModel.findOne({ userId, status: "active" });
+  }
+
   if (!cart) {
     cart = await createCartForUser({ userId });
   }
@@ -36,7 +47,10 @@ export const clearCart = async ({ userId }: ClearCart) => {
   cart.totalAmount = 0;
 
   const updatedCart = await cart.save();
-  return { data: updatedCart, statusCode: 200 };
+  return {
+    data: await getActiveCartForUser({ userId, populateProducts: true }),
+    statusCode: 200,
+  };
 };
 
 interface AddItemToCart {
@@ -76,9 +90,9 @@ export const addItemToCart = async ({
   //update the totalAmount for the cart
   cart.totalAmount += product.price * quantity;
 
-  const updateCart = await cart.save();
+  await cart.save();
   return {
-    data: updateCart,
+    data: await getActiveCartForUser({ userId, populateProducts: true }),
     statusCode: 200,
   };
 };
@@ -123,9 +137,9 @@ export const updateItemInCart = async ({
   total += existsInCart.quantity * existsInCart.unitPrice;
 
   cart.totalAmount = total;
-  const updateCart = await cart.save();
+  await cart.save();
   return {
-    data: updateCart,
+    data: await getActiveCartForUser({ userId, populateProducts: true }),
     statusCode: 200,
   };
 };
@@ -158,9 +172,9 @@ export const deleteItemInCart = async ({
   cart.items = otherCartItems;
   cart.totalAmount = total;
 
-  const updateCart = await cart.save();
+  await cart.save();
   return {
-    data: updateCart,
+    data: await getActiveCartForUser({ userId, populateProducts: true }),
     statusCode: 200,
   };
 };

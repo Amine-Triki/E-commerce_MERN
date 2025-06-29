@@ -8,3 +8,4 @@ export { default as RegisterPage } from "./RegisterPage/RegisterPage";
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as CartPage } from "./CartPage/CartPage";
 export { default as CheckoutPage } from "./CheckoutPage/CheckoutPage";
+export { default as OrderSuccessPage } from "./OrderSuccessPage/OrderSuccessPage";
