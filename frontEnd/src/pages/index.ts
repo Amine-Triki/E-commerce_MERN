@@ -1,9 +1,10 @@
-export {default as Home} from './home/Home'
-export {default as Projects} from './projects/Projects'
-export {default as Skills} from './skills/Skills'
-export {default as Contact} from './contact/Contact'
-export {default as NotFound} from './notFound/NotFound'
-export {default as Ecommerce} from './Ecommerce/Ecommerce'
-export {default as RegisterPage} from './RegisterPage/RegisterPage'
-export {default as LoginPage} from './LoginPage/LoginPage'
-export {default as CartPage} from './CartPage/CartPage'
+export { default as Home } from "./home/Home";
+export { default as Projects } from "./projects/Projects";
+export { default as Skills } from "./skills/Skills";
+export { default as Contact } from "./contact/Contact";
+export { default as NotFound } from "./notFound/NotFound";
+export { default as Ecommerce } from "./Ecommerce/Ecommerce";
+export { default as RegisterPage } from "./RegisterPage/RegisterPage";
+export { default as LoginPage } from "./LoginPage/LoginPage";
+export { default as CartPage } from "./CartPage/CartPage";
+export { default as CheckoutPage } from "./CheckoutPage/CheckoutPage";
