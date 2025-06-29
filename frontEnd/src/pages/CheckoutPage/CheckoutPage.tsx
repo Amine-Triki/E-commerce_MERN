@@ -7,7 +7,7 @@ import { baseUrl } from "../../constants/baseUrl";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth/AuthContext";
 const CheckoutPage = () => {
-  const { cartItems, totalAmount } = useCart();
+  const { cartItems, totalAmount, clearCart } = useCart();
   const { token } = useAuth();
   const addressRef = useRef<HTMLInputElement>(null);
 
@@ -33,6 +33,8 @@ const CheckoutPage = () => {
     if (!response.ok) {
       return;
     }
+
+    clearCart();
     navigate("/order-success");
   };
   const renderCartItems = () => (
