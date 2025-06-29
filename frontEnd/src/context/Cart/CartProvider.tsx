@@ -74,16 +74,18 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         ({
           product,
           quantity,
+          unitPrice
         }: {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           product: any;
           quantity: number;
+          unitPrice: number;
         }) => ({
           productId: product._id,
           title: product.title,
           image: product.image,
           quantity,
-          unitPrice: product.unitPrice,
+          unitPrice
         })
       );
 

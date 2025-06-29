@@ -133,7 +133,7 @@ export const updateItemInCart = async ({
 
   let total = calculateCartTotalItems({ cartItems: otherCartItems });
 
-  existsInCart.quantity += quantity;
+  existsInCart.quantity = quantity;
   total += existsInCart.quantity * existsInCart.unitPrice;
 
   cart.totalAmount = total;

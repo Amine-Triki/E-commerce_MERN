@@ -50,7 +50,7 @@ navigate("/checkout");
             <Box>
               <Typography variant="h6">{item.title}</Typography>
               <Typography>
-                {item.quantity} x {item.unitPrice} TND{" "}
+                {item.quantity} x {item.unitPrice} TND
               </Typography>
               <Button onClick={() => handleremoveItem(item.productId)}>
                 Remove item
@@ -73,7 +73,7 @@ navigate("/checkout");
       ))}
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <Typography variant="h4">
-          Total Amount: {totalAmount.toFixed(2)} TNDs
+          Total Amount: {totalAmount.toFixed(2)} TND
         </Typography>
         <Button variant="contained" onClick={handleCheckout}>Go To Checkout</Button>
       </Box>
