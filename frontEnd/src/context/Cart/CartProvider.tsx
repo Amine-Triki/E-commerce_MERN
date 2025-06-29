@@ -8,6 +8,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const { token } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const addItemToCart = async (productId: string) => {
     try {
-      const response = await fetch(`${baseUrl}/cart/item`, {
+      const response = await fetch(`${baseUrl}/cart/items`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +96,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const updateItemInCart = async (productId: string, quantity: number) => {
     try {
-      const response = await fetch(`${baseUrl}/cart/item`, {
+      const response = await fetch(`${baseUrl}/cart/items`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +141,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const removeItemInCart = async (productId: string) => {
     try {
-      const response = await fetch(`${baseUrl}/cart/item/${productId}`, {
+      const response = await fetch(`${baseUrl}/cart/items/${productId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
