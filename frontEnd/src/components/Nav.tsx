@@ -22,7 +22,7 @@ const pages: string[] = ["Home", "Projects", "Ecommerce", "Skills", "Contact"];
 
 function Nav(): JSX.Element {
   const { username, isAuthenticated, logout } = useAuth();
-  const { cartItems} = useCart();
+  const { cartItems } = useCart();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,6 +33,8 @@ function Nav(): JSX.Element {
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
+  const navigate = useNavigate();
+
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
   };
@@ -41,10 +43,13 @@ function Nav(): JSX.Element {
     setAnchorElNav(null);
   };
 
-  const navigate = useNavigate();
-
   const handlelogin = () => {
     navigate("/login");
+  };
+
+  const handleMyOrders = () => {
+    navigate("/my-orders");
+    handleClose();
   };
 
   const heandlelogout = () => {
@@ -188,9 +193,13 @@ function Nav(): JSX.Element {
             {username}
           </Typography>
 
-          <IconButton aria-label="cart" sx={{ margin: "0 10px" }} onClick={handleCart} >
+          <IconButton
+            aria-label="cart"
+            sx={{ margin: "0 10px" }}
+            onClick={handleCart}
+          >
             <Badge badgeContent={cartItems.length} color="secondary">
-              <ShoppingCart  />
+              <ShoppingCart />
             </Badge>
           </IconButton>
           {isAuthenticated ? (
@@ -223,7 +232,7 @@ function Nav(): JSX.Element {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>My Orders</MenuItem>
+                <MenuItem onClick={handleMyOrders}>My Orders</MenuItem>
                 <MenuItem onClick={heandlelogout}>Logout</MenuItem>
               </Menu>
             </Box>

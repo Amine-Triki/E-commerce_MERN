@@ -18,6 +18,7 @@ import {
   CartPage,
   CheckoutPage,
   OrderSuccessPage,
+  MyOrderPage,
 } from "./pages/index";
 import AuthProvider from "./context/Auth/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
           { path: "/cart", element: <CartPage /> },
           { path: "/checkout", element: <CheckoutPage /> },
           { path: "/order-success", element: <OrderSuccessPage /> },
+          { path: "/my-orders", element: <MyOrderPage /> },
         ],
       },
       /*end protect route for cart */
